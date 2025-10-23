@@ -52,6 +52,14 @@ const AddDoctorPage: React.FC = () => {
     setLoading(false)
   }, [])
 
+  // Helper to safely set date values
+  const setDateValue = (
+    field: 'startTime' | 'endTime' | 'lunchStart' | 'lunchEnd',
+    value: Date | null | undefined
+  ) => {
+    setDoctor({ ...doctor, [field]: value ?? null })
+  }
+
   const handleSubmit = async () => {
     if (
       !doctor.name ||
@@ -132,6 +140,7 @@ const AddDoctorPage: React.FC = () => {
       <Card className="shadow-3 border-round-2xl p-4">
         <h2 className="text-xl font-semibold mb-4">Add New Doctor</h2>
         <div className="grid formgrid">
+          {/* Name */}
           <div className="col-12 md:col-6 mb-3">
             <label>Name</label>
             <InputText
@@ -141,6 +150,7 @@ const AddDoctorPage: React.FC = () => {
             />
           </div>
 
+          {/* Qualification */}
           <div className="col-12 md:col-6 mb-3">
             <label>Qualification</label>
             <InputText
@@ -150,6 +160,7 @@ const AddDoctorPage: React.FC = () => {
             />
           </div>
 
+          {/* Department */}
           <div className="col-12 md:col-6 mb-3">
             <label>Department</label>
             <Dropdown
@@ -161,6 +172,7 @@ const AddDoctorPage: React.FC = () => {
             />
           </div>
 
+          {/* Specialization */}
           <div className="col-12 md:col-6 mb-3">
             <label>Specialization</label>
             <InputText
@@ -170,6 +182,7 @@ const AddDoctorPage: React.FC = () => {
             />
           </div>
 
+          {/* Experience */}
           <div className="col-12 md:col-4 mb-3">
             <label>Experience (Years)</label>
             <InputNumber
@@ -179,6 +192,7 @@ const AddDoctorPage: React.FC = () => {
             />
           </div>
 
+          {/* Fee */}
           <div className="col-12 md:col-4 mb-3">
             <label>Consultation Fee (₹)</label>
             <InputNumber
@@ -188,6 +202,7 @@ const AddDoctorPage: React.FC = () => {
             />
           </div>
 
+          {/* Duration */}
           <div className="col-12 md:col-4 mb-3">
             <label>Duration per Patient (mins)</label>
             <InputNumber
@@ -197,6 +212,7 @@ const AddDoctorPage: React.FC = () => {
             />
           </div>
 
+          {/* Available Days */}
           <div className="col-12 md:col-6 mb-3">
             <label>Available Days</label>
             <Dropdown
@@ -209,6 +225,7 @@ const AddDoctorPage: React.FC = () => {
             />
           </div>
 
+          {/* Max Patients */}
           <div className="col-12 md:col-6 mb-3">
             <label>Max Patients / Day</label>
             <InputNumber
@@ -218,46 +235,59 @@ const AddDoctorPage: React.FC = () => {
             />
           </div>
 
+          {/* Start Time */}
           <div className="col-12 md:col-6 mb-3">
             <label>Start Time</label>
             <Calendar
               className="w-full"
               timeOnly
               value={doctor.startTime}
-              onChange={(e) => setDoctor({ ...doctor, startTime: e.value })}
+              onChange={(e: { value: Date | Date[] | null | undefined }) =>
+                setDateValue('startTime', e.value as Date | null)
+              }
             />
           </div>
 
+          {/* End Time */}
           <div className="col-12 md:col-6 mb-3">
             <label>End Time</label>
             <Calendar
               className="w-full"
               timeOnly
               value={doctor.endTime}
-              onChange={(e) => setDoctor({ ...doctor, endTime: e.value })}
+              onChange={(e: { value: Date | Date[] | null | undefined }) =>
+                setDateValue('endTime', e.value as Date | null)
+              }
             />
           </div>
 
+          {/* Lunch Start */}
           <div className="col-12 md:col-6 mb-3">
             <label>Lunch Break Start</label>
             <Calendar
               className="w-full"
               timeOnly
               value={doctor.lunchStart}
-              onChange={(e) => setDoctor({ ...doctor, lunchStart: e.value })}
+              onChange={(e: { value: Date | Date[] | null | undefined }) =>
+                setDateValue('lunchStart', e.value as Date | null)
+              }
             />
           </div>
 
+          {/* Lunch End */}
           <div className="col-12 md:col-6 mb-4">
             <label>Lunch Break End</label>
             <Calendar
               className="w-full"
               timeOnly
               value={doctor.lunchEnd}
-              onChange={(e) => setDoctor({ ...doctor, lunchEnd: e.value })}
+              onChange={(e: { value: Date | Date[] | null | undefined }) =>
+                setDateValue('lunchEnd', e.value as Date | null)
+              }
             />
           </div>
 
+          {/* Submit Button */}
           <div className="col-12">
             <Button
               label="Add Doctor"

@@ -2,7 +2,7 @@
 import React from 'react'
 import Dashboard  from '../components/Dashboard/Dashboard'
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen">
       <Dashboard/>
@@ -10,3 +10,4 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     </div>
   )
 }
+export default DashboardLayout

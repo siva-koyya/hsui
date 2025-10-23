@@ -7,7 +7,7 @@ import Dashboard from '@/components/Dashboard/Dashboard';
 import AnalyticsOverview from '@/components/Analytics/AnalyticsOverview';
 import PaymentDashboard from '@/components/Payment/PaymentDashboard';
 
-export default function DashboardPage() {
+ function DashboardPage() {
   return (
     <div className=" min-h-screen bg-gray-50 p-4 gap-4">
       {/* Dashboard Header */}
@@ -22,3 +22,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+export default DashboardPage;

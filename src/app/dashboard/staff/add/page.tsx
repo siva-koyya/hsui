@@ -8,7 +8,7 @@ import { Button } from 'primereact/button'
 import { Card } from 'primereact/card'
 import { Toast } from 'primereact/toast'
 
-export const AddStaff: React.FC = () => {
+const AddStaffPage: React.FC = () => {
   const toast = useRef<Toast>(null)
 
   const [staff, setStaff] = useState({
@@ -22,7 +22,6 @@ export const AddStaff: React.FC = () => {
   const roles = ['Reception', 'Queue Management', 'Billing', 'Pharmacy', 'Lab Assistant']
 
   const handleSubmit = async () => {
-    // Validation
     if (!staff.fullName || !staff.email || !staff.phone || !staff.password || !staff.role) {
       toast.current?.show({
         severity: 'warn',
@@ -50,16 +49,10 @@ export const AddStaff: React.FC = () => {
         life: 3000,
       })
 
-      console.log('✅ Staff saved:', data)
-
       // Reset form
-      setStaff({
-        fullName: '',
-        email: '',
-        phone: '',
-        password: '',
-        role: '',
-      })
+      setStaff({ fullName: '', email: '', phone: '', password: '', role: '' })
+
+      console.log('✅ Staff saved:', data)
     } catch (error) {
       console.error('❌ Error:', error)
       toast.current?.show({
@@ -141,4 +134,4 @@ export const AddStaff: React.FC = () => {
   )
 }
 
-export default AddStaff
+export default AddStaffPage

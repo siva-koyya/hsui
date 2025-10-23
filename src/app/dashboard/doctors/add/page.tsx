@@ -14,11 +14,10 @@ interface Department {
   name: string
 }
 
-export const AddDoctor: React.FC = () => {
+const AddDoctorPage: React.FC = () => {
   const toast = useRef<Toast>(null)
 
-  // ✅ Static department list (numeric IDs)
-  const departmentdata: Department[] = [
+  const departmentData: Department[] = [
     { id: 1, name: 'Cardiology' },
     { id: 2, name: 'Neurology' },
     { id: 3, name: 'Orthopedics' },
@@ -48,15 +47,12 @@ export const AddDoctor: React.FC = () => {
 
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-  // ✅ Initialize static departments
   useEffect(() => {
-    setDepartments(departmentdata)
+    setDepartments(departmentData)
     setLoading(false)
   }, [])
 
-  // ✅ Submit handler
   const handleSubmit = async () => {
-    console.log('Submitting doctor:', doctor);
     if (
       !doctor.name ||
       !doctor.qualification ||
@@ -83,7 +79,6 @@ export const AddDoctor: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...doctor,
-          departmentId: doctor.departmentId?.toString(), // ensure number
           startTime: doctor.startTime?.toISOString(),
           endTime: doctor.endTime?.toISOString(),
           lunchStart: doctor.lunchStart?.toISOString(),
@@ -93,7 +88,8 @@ export const AddDoctor: React.FC = () => {
 
       if (!response.ok) throw new Error('Failed to save doctor')
 
-      const data = await response.json()
+      await response.json()
+
       toast.current?.show({
         severity: 'success',
         summary: 'Success',
@@ -117,10 +113,8 @@ export const AddDoctor: React.FC = () => {
         duration: 15,
         maxPatients: 20,
       })
-
-      console.log('✅ Saved doctor:', data)
     } catch (error) {
-      console.error('❌ Error:', error)
+      console.error('Error saving doctor:', error)
       toast.current?.show({
         severity: 'error',
         summary: 'Error',
@@ -161,7 +155,7 @@ export const AddDoctor: React.FC = () => {
             <Dropdown
               className="w-full"
               value={doctor.departmentId}
-              options={departments.map((d) => ({ label: d.name, value: d.name }))}
+              options={departments.map((d) => ({ label: d.name, value: d.id }))}
               onChange={(e) => setDoctor({ ...doctor, departmentId: e.value })}
               placeholder="Select Department"
             />
@@ -278,4 +272,4 @@ export const AddDoctor: React.FC = () => {
   )
 }
 
-export default AddDoctor
+export default AddDoctorPage
